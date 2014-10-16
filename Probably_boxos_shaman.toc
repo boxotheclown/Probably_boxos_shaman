@@ -1,0 +1,6 @@
+## Interface: 60000
+## Title: Probably - boxo's shaman
+## Notes: ProbablyEngine Custom Enhancement Shaman
+## Dependencies: Probably
+
+rotation.lua
