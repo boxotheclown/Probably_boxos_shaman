@@ -34,11 +34,11 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 
 -- Maelstrom Weapon heal
 
---	{ "8004", { 					-- chain heal
---	  "player.buff(53817).count = 5",
---	  "modifier.lcontrol",
+	{ "8004", { 					-- chain heal
+	  "player.buff(53817).count = 5",
+	  "modifier.lcontrol",
 --	  "mouseover"
---	}},
+	}},
 
 -- cc chaining
 
@@ -103,6 +103,8 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 -- 2 units
 
 {{
+
+{{
 	{ "73680" }, 					-- unleash elements
 	{ "1535", "target.debuff(8050)" },	-- fire nova if flame shock on target
 	{ "117014", {					-- elemental blast
@@ -139,10 +141,9 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 	  "!player.totem(2894)",
 	  "player.totem(8190).duration <= 20"	  
 	}}
-} , "modifier.multitarget" },
---    (function() return UnitsAroundUnit('target', 10) <= 2 end) --},
-
-
+} , { "!toggle.chain" } ,
+--    (function() return UnitsAroundUnit('target', 10) <= 2 end) 
+} ,      
 -- 3+ units
 
 {{
@@ -168,7 +169,7 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 	  "target.debuff(8050).duration <= 9",
 	  "player.buff(73683)"
 	}}, 	
-	{ "421", { 					-- lb if everything else is on cooldown
+	{ "421", { 					-- cl if everything else is on cooldown
 	  "player.buff(53817).count >= 1",
 	  "!modifier.lcontrol",
 	  "player.spell(73680).cooldown >= 1.5",
@@ -181,8 +182,11 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 	  "!player.totem(2894)",
 	  "player.totem(8190).duration <= 20"	  
 	}}
-}, "modifier.multitarget",
-    (function() return UnitsAroundUnit('target', 10) >= 3 end) },
+}, { "toggle.chain" },
+--    (function() return UnitsAroundUnit('target', 10) >= 3 end)      
+} ,
+} , { "modifier.multitarget" },
+} ,
 -- Single Target (nested)
 {{
 	{ "73680" }, 					-- unleash elements
@@ -241,7 +245,7 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
   -------------
 
 }, function()
-  ProbablyEngine.toggle.create('totems', 'Interface\\ICONS\\ability_shaman_totemrelocation', 'Totems', 'Toggle the placement of totems.')
+  ProbablyEngine.toggle.create('chain', 'Interface\\ICONS\\spell_nature_chainlightning', 'chain', 'Toggle AOE for Chain Lightning Use.')
 end)
 
 
