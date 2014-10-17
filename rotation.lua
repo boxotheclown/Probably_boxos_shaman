@@ -1,7 +1,7 @@
 -- ProbablyEngine Rotation Packager
 -- Custom Enhancement Shaman Rotation
 -- Created on Oct 15th 2014
--- V 0.1
+-- V 0.2
 ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 
   --------------------
