@@ -11,8 +11,14 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 	{ "pause", "modifier.lshift" },
 
 -- interrupt with wind shear
-	{ "57994", "modifier.interrupts" },
-	{ "57994", "modifier.interrupts", "focus" },
+	{ "57994", {
+		"modifier.interrupts",
+		"target.interruptAt(30)"
+	}},
+	{ "57994", {
+		"modifier.interrupts",
+		"focus.interruptAt(30)"
+	}, "focus" },
 
 -- Defensives
 	{ "30823", { 					-- sham rage
@@ -92,6 +98,7 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 	{ "8190", { 					-- magma totem
 	  "!player.totem(2894)",
 	  "!player.totem(8190)",
+	  "target.range <= 6",
 	  "modifier.multitarget"
 	}},
 
