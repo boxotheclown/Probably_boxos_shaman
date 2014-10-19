@@ -36,7 +36,7 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 	  "modifier.lalt",
 	  "!player.buff(30823)"
 	}},
---	{ "#5512", "player.health <= 45" },  	-- use healthstone
+	{ "#5512", "player.health <= 45" },  	-- use healthstone
 
 -- Maelstrom Weapon heal
 
@@ -148,8 +148,9 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 	  "!player.totem(2894)",
 	  "player.totem(8190).duration <= 20"	  
 	}}
-} , { "!toggle.chain" } ,
---    (function() return UnitsAroundUnit('target', 10) <= 2 end) 
+} , { (function() return UnitsAroundUnit('target', 10) == 2 end) } ,
+--   (function() return UnitsAroundUnit('target', 10) == 2 end)
+--	"!toggle.chain" 
 } ,      
 -- 3+ units
 
@@ -189,8 +190,9 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 	  "!player.totem(2894)",
 	  "player.totem(8190).duration <= 20"	  
 	}}
-}, { "toggle.chain" },
---    (function() return UnitsAroundUnit('target', 10) >= 3 end)      
+}, { (function() return UnitsAroundUnit('target', 10) >= 3 end) },
+--    (function() return UnitsAroundUnit('target', 10) >= 3 end)
+--	 "toggle.chain"      
 } ,
 } , { "modifier.multitarget" },
 } ,
@@ -232,7 +234,7 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 	  "player.totem(3599).duration <= 20"	  
 	}}
 } , "!modifier.multitarget" },
-
+  
   ------------------
   -- End Rotation --
   ------------------
