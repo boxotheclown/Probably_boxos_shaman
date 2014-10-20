@@ -1,7 +1,7 @@
 -- ProbablyEngine Rotation Packager
 -- Custom Enhancement Shaman Rotation
 -- Created on Oct 15th 2014
--- V 0.2
+-- V 0.3
 ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 
   --------------------
@@ -92,6 +92,7 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 	{ "3599", { 					-- searing totem single target
 	  "!player.totem(2894)",
 	  "!player.totem(3599)",
+	  "target.range <= 12",
 	  "!modifier.multitarget"
 	}},
 	
@@ -99,7 +100,16 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 	  "!player.totem(2894)",
 	  "!player.totem(8190)",
 	  "target.range <= 6",
-	  "modifier.multitarget"
+	  "modifier.multitarget",
+	  (function() return UnitsAroundUnit('target', 10) >= 2 end) 
+	}},
+
+{ "3599", { 					-- searing totem smart
+	  "!player.totem(2894)",
+	  "!player.totem(3599)",
+	  "target.range <= 12",
+	  "modifier.multitarget",
+	  (function() return UnitsAroundUnit('target', 10) < 2 end) 
 	}},
 
 -- Rotations
@@ -194,6 +204,47 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 --    (function() return UnitsAroundUnit('target', 10) >= 3 end)
 --	 "toggle.chain"      
 } ,
+
+-- single target smart aoe
+
+{{
+	{ "73680" }, 					-- unleash elements
+	{ "117014", {					-- elemental blast
+	  "player.buff(53817).count >= 1",
+	  "player.spell(117014).exists"
+	  }}, 
+	{ "403", { 					-- lb instant with maelstrom weapon
+	  "player.buff(53817).count = 5",
+	  "!modifier.lcontrol" 
+	}},
+	{ "403", "player.buff(16188)" }, 	-- lb instant with as
+	{ "17364", "target.range <= 6"  }, 	-- stormstrike
+	{ "115356" }, -- Windstrike
+	{ "60103", "target.range <= 6" }, 	-- lava lash
+	{ "8050", {					-- flame shock with when no flame shock on target
+	  "!target.debuff(8050)",
+	  "player.buff(73683)"
+	}},
+	{ "8050", {					-- flame shock with when 9 seconds left on flame shock
+	  "target.debuff(8050).duration <= 9",
+	  "player.buff(73683)"
+	}}, 	
+	{ "8056" }, 	-- Frost Shock
+	{ "403", { 					-- lb if everything else is on cooldown
+	  "player.buff(53817).count >= 1",
+	  "!modifier.lcontrol",
+	  "player.spell(73680).cooldown >= 1.5",
+	  "player.spell(17364).cooldown >= 1.5",
+	  "player.spell(8050).cooldown >= 1.5",
+	  "player.spell(60103).cooldown >= 1.5",
+	  "!modifier.last(403)"
+	}},
+	{ "3599", { 					-- refresh searing totem if nothing else to do
+	  "!player.totem(2894)",
+	  "player.totem(3599).duration <= 20"	  
+	}}
+} , (function() return UnitsAroundUnit('target', 10) < 2 end) },
+
 } , { "modifier.multitarget" },
 } ,
 -- Single Target (nested)
