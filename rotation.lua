@@ -117,9 +117,9 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 
 -- Multitarget (nested)
 
--- 2 units
-
 {{
+
+-- 2 units
 
 {{
 	{ "73680" }, 					-- unleash elements
