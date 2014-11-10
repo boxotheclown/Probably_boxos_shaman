@@ -2,7 +2,7 @@
 -- Custom Enhancement Shaman Rotation
 -- Created on Oct 15th 2014
 -- V 0.3
-ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
+ProbablyEngine.rotation.register_custom(263, "boxo's enhancement", {
 
   --------------------
   -- Start Rotation --
@@ -43,14 +43,13 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 	{ "8004", { 					-- chain heal
 	  "player.buff(53817).count = 5",
 	  "modifier.lcontrol",
---	  "mouseover"
-	}},
+	}, 	"mouseover" },
 
 -- cc chaining
 
-	{ "51514", {					-- Hex
-	  "focus.debuff(51514).duration < 10",
-	  "!player.moving" }, "focus" },
+--	{ "51514", {					-- Hex
+--	  "focus.debuff(51514).duration < 10",
+--	  "!player.moving" }, "focus" },
 
 -- Buffs
 	{ "324", "!player.buff(324)" }, 		-- lightning shield
@@ -101,7 +100,7 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 	  "!player.totem(8190)",
 	  "target.range <= 6",
 	  "modifier.multitarget",
-	  (function() return UnitsAroundUnit('target', 10) >= 2 end) 
+	  "target.area(10).enemies >= 2",
 	}},
 
 { "3599", { 					-- searing totem smart
@@ -109,7 +108,7 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 	  "!player.totem(3599)",
 	  "target.range <= 12",
 	  "modifier.multitarget",
-	  (function() return UnitsAroundUnit('target', 10) < 2 end) 
+	  "target.area(10).enemies < 2",
 	}},
 
 -- Rotations
@@ -158,10 +157,10 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 	  "!player.totem(2894)",
 	  "player.totem(8190).duration <= 20"	  
 	}}
-} , { (function() return UnitsAroundUnit('target', 10) == 2 end) } ,
+}, "target.area(10).enemies = 2" },  
 --   (function() return UnitsAroundUnit('target', 10) == 2 end)
 --	"!toggle.chain" 
-} ,      
+    
 -- 3+ units
 
 {{
@@ -176,7 +175,7 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 	  "!modifier.lcontrol" 
 	}},
 	{ "421", "player.buff(16188)" }, 	-- cl instant with as
-	{ "17364", "target.range <= 6"  }, 	-- stormstrike
+	{ "17364", "target.range <= 6" }, 	-- stormstrike
 	{ "115356" },	-- Windstrike
 	{ "60103", "target.range <= 6" }, 	-- lava lash
 	{ "8050", {					-- flame shock with when no flame shock on target
@@ -200,10 +199,10 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 	  "!player.totem(2894)",
 	  "player.totem(8190).duration <= 20"	  
 	}}
-}, { (function() return UnitsAroundUnit('target', 10) >= 3 end) },
+}, "target.area(10).enemies >= 3" },
 --    (function() return UnitsAroundUnit('target', 10) >= 3 end)
 --	 "toggle.chain"      
-} ,
+
 
 -- single target smart aoe
 
@@ -243,7 +242,7 @@ ProbablyEngine.rotation.register_custom(263, "boxo's shaman", {
 	  "!player.totem(2894)",
 	  "player.totem(3599).duration <= 20"	  
 	}}
-} , (function() return UnitsAroundUnit('target', 10) < 2 end) },
+} , "target.area(10).enemies < 2" },
 
 } , { "modifier.multitarget" },
 } ,

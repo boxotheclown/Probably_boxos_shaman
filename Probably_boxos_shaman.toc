@@ -3,4 +3,5 @@
 ## Notes: ProbablyEngine Custom Enhancement Shaman
 ## Dependencies: Probably
 
-rotation.lua
+enhancement.lua
+elemental.lua
