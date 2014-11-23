@@ -5,3 +5,4 @@
 
 enhancement.lua
 elemental.lua
+restoration.lua

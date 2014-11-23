@@ -17,7 +17,8 @@ ProbablyEngine.rotation.register_custom(263, "boxo's enhancement", {
 	}},
 	{ "57994", {
 		"modifier.interrupts",
-		"focus.interruptAt(30)"
+		"focus.interruptAt(30)",
+		"focus.enemy",
 	}, "focus" },
 
 -- Defensives
@@ -36,20 +37,48 @@ ProbablyEngine.rotation.register_custom(263, "boxo's enhancement", {
 	  "modifier.lalt",
 	  "!player.buff(30823)"
 	}},
+	
+	{ "2062", { -- earth elemental for reinforce
+		"modifier.lalt",
+		"!player.buff(30823)",
+		"!player.totem(2894)",
+	}},
+	{ "118347", { "player.totem(2062)", "!player.buff(Reinforce)" } }, -- reinforce
+		
 	{ "#5512", "player.health <= 45" },  	-- use healthstone
-
+	{ "108273", {	-- windwalk totem
+		"!player.buff(Windwalk Totem)",
+		"player.state.root",
+		"!player.totem(Windwalk Totem)",
+	}},
+	{ "108273", {	-- windwalk totem
+		"!player.buff(Windwalk Totem)",
+		"player.state.snare",
+		"!player.totem(Windwalk Totem)",
+	}},
+	{ "8143", { -- Tremor Totem
+		"!player.buff(Tremor Totem)",
+		"player.state.fear",
+		"!player.totem(Tremor Totem)",
+	}},
 -- Maelstrom Weapon heal
 
 	{ "8004", { 					-- chain heal
 	  "player.buff(53817).count = 5",
 	  "modifier.lcontrol",
+	  "mouseover.alive",
+	  "mouseover.friend",
 	}, 	"mouseover" },
 
 -- cc chaining
 
---	{ "51514", {					-- Hex
---	  "focus.debuff(51514).duration < 10",
---	  "!player.moving" }, "focus" },
+	{ "51514", {					-- Hex
+	  "focus.debuff(51514).duration < 10",
+	  "!player.moving",
+	  "focus.enemy",
+	  "focus.alive",
+	  "focus.distance < 30",
+	}, "focus" },
 
 -- Buffs
 	{ "324", "!player.buff(324)" }, 		-- lightning shield
@@ -70,9 +99,7 @@ ProbablyEngine.rotation.register_custom(263, "boxo's enhancement", {
 	{ "33697", {					-- Blood Fury
 	  "player.spell(33697).exists"
 	}},
-	{ "120668", { 				-- stormlash
-	  "!player.buff(120676)"
-	}},
+
 -- elemental mastery a bunch of different ways
 	{ "16166", { 					-- elemental mastery
 	  "player.spell(16166).exists"
@@ -80,8 +107,9 @@ ProbablyEngine.rotation.register_custom(263, "boxo's enhancement", {
 	{ "114049", { 				-- ascendance
 	  "!player.buff(114051)"
 	}},
+	{ "Storm Elemental Totem" },	-- storm elemental totem
 	{ "2894" }, 					-- fire elemental totem
-	{ "2062" }, 					-- earth elemental totem
+--	{ "2062" }, 					-- earth elemental totem
 	{ "51533" }, 					-- feral spirit
 	{ "16188", "player.spell(16188).exists" },	-- ancestral swiftness
 } , "modifier.cooldowns" },
@@ -298,6 +326,16 @@ ProbablyEngine.rotation.register_custom(263, "boxo's enhancement", {
   -- Buffs
 
 { "324", "!player.buff(324)" }, -- lightning shield  
+
+-- cc chaining
+
+	{ "51514", {					-- Hex
+	  "focus.debuff(51514).duration < 10",
+	  "!player.moving",
+	  "focus.enemy",
+	  "focus.alive",
+	  "focus.distance < 30",
+	}, "focus" },
 
   -------------
   -- OOC End --
