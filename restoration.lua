@@ -5,23 +5,28 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
   -- Start Rotation --
   --------------------
 
-  -- From Akeon's Elemental Profile[http://pe.phelps.io/forums/viewtopic.php?id=41]
-  -- Rotation Utilities
+  -- Pause
   { "pause", "modifier.lshift" },
-  --{ "/script TargetNearestEnemy()", { "toggle.autotarget", "!target.exists" } },
-  --{ "/script TargetNearestEnemy()", { "toggle.autotarget", "target.exists", "target.dead" } },
-  
+
   -- Interrupt
-  --Wind Shear
-  { "57994", "modifier.interrupt" },
+  { "57994", "modifier.interrupt" },   --Wind Shear
+
  
-  --Survival Abilities
-  --Windwalk x2
-  { "108273", { "toggle.survival", "!player.buff", "player.state.root" }, "player" }, 
-  { "108273", { "toggle.survival", "!player.buff", "player.state.snare" }, "player" }, 
---  { "77130", { "toggle.survival", "!modifier.last(77130)", "player.dispellable(77130)" }, "player" }, 
+  --Survival
+  --Windwalk totem
+	{ "108273", {
+		"toggle.survival",
+		"!player.buff",
+		"player.state.root"
+	}, "player" }, 
+	{ "108273", {
+		"toggle.survival",
+		"!player.buff",
+		"player.state.snare"
+	}, "player" }, 
+
  
-  -- Control Toggles[Modified]
+  -- Healing Rain
   { "Healing Rain", "modifier.lcontrol" , "mouseover.ground" },
 
  -- water shield
@@ -48,13 +53,7 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 		"focus.range <= 40",
 	}, "focus" },
 
---	{ "Elemental Blast", "talent(6, 3)" },
 -- emergency
-	{ "Ascendance", { 
-		"@coreHealing.needsHealing(40,3)", 
-		"!player.buff(Ascendance)", 
-		"modifier.cooldowns"
-	}},
 	{ "Ancestral Swiftness", "lowest.health <= 40" },
 	{ "Healing Wave", {
 		"player.buff(Ancestral Swiftness)",
@@ -67,7 +66,7 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 
 -- purge
 
-	{ "Purge", "target.dispellable(Tranquilizing Shot)", "target" },
+	{ "Purge", "target.dispellable(Purge)", "target" },
 	
 -- high raid damage
 
@@ -127,13 +126,35 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 },
   
 {
+
+-------------------
+-- Out of Combat --	
+-------------------
+
+  -- Pause
+  { "pause", "modifier.lshift" },
+
+-- Akeon's Mouseover Cleanse
+	{ "77130", { 
+		"modifier.lalt",
+		"!modifier.last(77130)",
+		"mouseover.exists",
+		"mouseover.alive",
+		"mouseover.friend",
+		"mouseover.range <= 40",
+--		"mouseover.dispellable(77130)"
+	}, "mouseover" },
+
+-- healing rain
+	{ "Healing Rain", "modifier.lcontrol" , "mouseover.ground" },	
+
 	{ "Earth Shield", {
 		"focus.health <= 100", 
 		"!focus.buff(Earth Shield)", 
 		"focus.range <= 40",
 	}, "focus" },
 	{ "Water Shield", "!player.buff(Water Shield)" },
-	{ "Healing Rain", "modifier.lcontrol" , "mouseover.ground" },
+
 	{ "Riptide", { 
 		"focus.health <= 100", 
 		"!focus.buff(Riptide)", 
@@ -144,6 +165,11 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 		"lowest.range <= 40",
 		"!lowest.buff(Riptide)",
 		"focus.buff(Riptide).duration > 6",
+	}, "lowest" },
+
+	{ "Healing Wave", {
+		"lowest.health <= 85",
+		"lowest.range <= 40",
 	}, "lowest" },
 	
 }, function()
