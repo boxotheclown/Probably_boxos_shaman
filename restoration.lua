@@ -30,7 +30,6 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
   { "Healing Rain", "modifier.lcontrol" , "mouseover.ground" },
 
  -- water shield
- 
 	{ "Water Shield", "!player.buff(Water Shield)" },
   
   -- Akeon's Mouseover Cleanse
@@ -46,7 +45,6 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 
 	
 -- earth shield
-
 	{ "Earth Shield", {
 		"focus.health <= 100", 
 		"!focus.buff(Earth Shield)", 
@@ -54,11 +52,8 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 	}, "focus" },
 
 -- emergency
+	{ "Unleash Life", "lowest.health <= 40" },
 	{ "Ancestral Swiftness", "lowest.health <= 40" },
-	{ "Healing Wave", {
-		"player.buff(Ancestral Swiftness)",
-		"lowest.range <= 40"
-	}, "lowest" },
 	{ "Healing Surge", {
 		"lowest.health <= 40",
 		"lowest.range <= 40"
@@ -70,15 +65,14 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 	
 -- high raid damage
 
-{{
-	{ "Healing Stream Totem" },
-	{ "Unleash Life" },
-	{ "Chain Heal", { 
-		"@coreHealing.needsHealing(60, 3)",
---		"lowest.area(12).players >= 2",
-		"lowest.range <= 40" 
-	}, "lowest" },
-}, "@coreHealing.needsHealing(60, 3)", },
+	{{
+		{ "Healing Stream Totem" },
+		{ "Unleash Life" },
+		{ "Chain Heal", { 
+	--		"lowest.area(12).players >= 2",
+			"lowest.range <= 40" 
+		}, "lowest" },
+	}, "@coreHealing.needsHealing(3, 60)", },
 
 -- high single target
 	  	  
@@ -87,21 +81,24 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 		"!focus.buff(Riptide)", 
 		"focus.range <= 40"
 	}, "focus" },
-	{ "Healing Wave", {
-		"talent{6, 1)",
-		"player.buff(Unleash Life)",
-		"lowest.range <= 40",
-	}, "lowest" },
 	{ "Riptide", {
 		"lowest.health <= 95",
 		"lowest.range <= 40",
 		"!lowest.buff(Riptide)",
 		"focus.buff(Riptide).duration > 6",
 	}, "lowest" },
-	
 	{ "Cloudburst Totem", { "talent(7, 1)", "!player.totem(Healing Stream Totem)", "!player.totem(Healing Tide Totem)" } },
 	{ "Healing Stream Totem", { "!player.totem(Healing Tide Totem)", "!player.totem(Cloudburst Totem)" } },
 	{ "Elemental Blast", { "talent(6, 3)", "player.mana < 50" } },
+	{ "Unleash Life", {
+		"lowest.health <= 70",
+		"lowest.range <= 40",
+	}},
+	{ "Chain Heal", {
+		"@coreHealing.needsHealing(3, 70)",
+		"lowest.range <= 40",
+--		"lowest.area(10).
+	}, "lowest" },
 	{ "Chain Heal", {
 		"!player.buff(Tidal Waves)",
 		"lowest.health <= 85",
@@ -111,20 +108,20 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 		"lowest.health <= 85",
 		"lowest.range <= 40",
 	}, "lowest" },
-	{ "Chain Heal", {
-		"@coreHealing.needsHealing(75, 3)",
-		"lowest.range <= 40",
---		"lowest.area(10).
-	}, "lowest" },
-	{ "Unleash Life", "lowest.health <= 70" },
-	{ "Healing Surge", {
-		"lowest.health <= 45",
-		"lowest.range <= 40",
-	}, "lowest" },
 	{ "Healing Stream Totem" },
 	{ "Elemental Blast", "talent(6, 3)" },
-},
-  
+
+	-- dps rotation
+
+	{{
+		{ "Fire Elemental Totem", { "!talent(6, 2)", "modifier.cooldowns" }},
+		{ "Searing Totem", { "!player.totem(Searing Totem)", "!player.totem(Fire Elemental Totem)" }},
+		{ "Flame Shock", "!target.debuff(Flame Shock)" },
+		{ "Lava Burst" },
+		{ "421", { "modifier.multitarget", "target.area(10).enemies > 2" } },
+		{ "Lightning Bolt" },		
+	}, { "toggle.dps", "lowest.health > 90 " }},
+
 {
 
 -------------------
@@ -173,6 +170,6 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 	}, "lowest" },
 	
 }, function()
-ProbablyEngine.toggle.create('md', 'Interface\\Icons\\ability_hunter_misdirection', 'Auto Misdirect', 'Automatially Misdirect when necessary')
+ProbablyEngine.toggle.create('dps', 'Interface\\Icons\\spell_fire_flameshock', 'dps', 'Do some damage with your heals')
 
 end)

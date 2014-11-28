@@ -20,6 +20,18 @@ ProbablyEngine.rotation.register_custom(262, "boxo's elemental shaman", {
 		"player.spell(Wind Shear).cooldown < 1",
 	}, "focus" },
 
+-- 3rd tier talents on control
+
+	{ "108284", { -- totemic projection
+		"talent(3, 3)",
+		"modifier.lcontrol"
+	}},
+	
+	{ "108284", { -- call of the elements
+		"talent(3, 1)",
+		"modifier.lcontrol"
+	}},
+	
 -- banners for exp (leveling)
 
 --	{ "#64402" },
@@ -32,13 +44,13 @@ ProbablyEngine.rotation.register_custom(262, "boxo's elemental shaman", {
 	}},
 
 	{ "108271", { 				-- astral shift
-	  "player.spell(108271).exists",
+	  "talent(1, 3)"
 	  "modifier.lalt",
 	  "!player.buff(30823)"
 	}},
 
 	{ "108270", { 				-- stone bulwark totem
-	  "player.spell(108270).exists",
+	  "talent(1, 2)"
 	  "modifier.lalt",
 	  "!player.buff(30823)"
 	}},
@@ -49,6 +61,7 @@ ProbablyEngine.rotation.register_custom(262, "boxo's elemental shaman", {
 		"!player.totem(2894)",
 		"talent(6, 2)",
 	}},
+
 	{ "118347", { "player.totem(2062)", "!player.buff(Reinforce)" } }, -- reinforce
 	{ "Healing Surge", "player.health < 40 ", "player" },	
 	{ "#5512", "player.health <= 45" },  	-- use healthstone
@@ -112,7 +125,12 @@ ProbablyEngine.rotation.register_custom(262, "boxo's elemental shaman", {
 
 --	}, "player.time <= 10" },
 
--- moooving
+-- universal
+
+	{ "Liquid Magma", "player.totem(3599).duration > 10" },
+	{ "Liquid Magma", "player.totem(2894).duration > 10" },
+
+-- moving
 	{{
 		{ "79206", { "player.buff(114050)" } }, -- spiritwalker's grace
 		{ "8042", { "player.buff(324)", "player.buff(324).count = 20" } }, -- earth shock
@@ -148,7 +166,7 @@ ProbablyEngine.rotation.register_custom(262, "boxo's elemental shaman", {
 			"toggle.chain",
 		}, "target.ground" },
 		{ "114074", "player.buff(114050)" }, -- lava beam with ascendance
-		{ "8042", { "player.buff(324)", "player.buff(324).count > 15" } }, -- earth shock
+		{ "8042", { "player.buff(324)", "player.buff(324).count > 17" } }, -- earth shock
 		{ "51490", "player.area(10).enemies >= 10" }, -- thunderstorm
 		{ "421", "target.area(10).enemies > 4" }, -- chain lightning
 	}, { "modifier.multitarget", "target.area(10).enemies > 1" } },	
@@ -157,7 +175,7 @@ ProbablyEngine.rotation.register_custom(262, "boxo's elemental shaman", {
 	{ "8050", "!target.debuff(Flame Shock)" }, -- flame shock if not present
 	{ "165462", "talent(6, 1)" }, -- unleash flame
 	{ "8042", { "player.buff(324)", "player.buff(324).count = 20" } }, -- earth shock
-	{ "51505", "target.debuff(Flame Shock).duration > 2" }, -- lava burst w/ lava surge
+	{ "51505", "target.debuff(Flame Shock).duration > 2" }, -- lava burst
 	{ "Elemental Blast", "talent(6, 3)" }, -- elemental blast
 	{ "8042", { "player.buff(324)", "player.buff(324).count > 15" } }, -- earth shock
 	{ "8050", "target.debuff(Flame Shock).duration < 9" }, -- flame shock
@@ -169,7 +187,7 @@ ProbablyEngine.rotation.register_custom(262, "boxo's elemental shaman", {
 --	}, "target.ground" }, -- earthquake
 	{ "3599", { "!player.totem(2894)", "!player.totem(3599)" }}, -- searing totem
 	{ "51505" }, -- lava burst on cooldown
-	{ "421", { "target.area(10)enemies > 2", "modifier.multitarget" } },
+	{ "421", { "modifier.multitarget", "target.area(10).enemies > 2" } },
 	{ "403" }, -- lightning bolt
 	
 }, {
