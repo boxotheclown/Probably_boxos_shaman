@@ -99,6 +99,7 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 		"lowest.range <= 40",
 --		"lowest.area(10).
 	}, "lowest" },
+	}, "lowest" },
 	{ "Chain Heal", {
 		"!player.buff(Tidal Waves)",
 		"lowest.health <= 85",
@@ -170,6 +171,7 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 	}, "lowest" },
 	
 }, function()
+
 ProbablyEngine.toggle.create('dps', 'Interface\\Icons\\spell_fire_flameshock', 'dps', 'Do some damage with your heals')
 
 end)
