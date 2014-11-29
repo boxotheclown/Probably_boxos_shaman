@@ -99,7 +99,6 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 		"lowest.range <= 40",
 --		"lowest.area(10).
 	}, "lowest" },
-	}, "lowest" },
 	{ "Chain Heal", {
 		"!player.buff(Tidal Waves)",
 		"lowest.health <= 85",
@@ -122,6 +121,8 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 		{ "421", { "modifier.multitarget", "target.area(10).enemies > 2" } },
 		{ "Lightning Bolt" },		
 	}, { "toggle.dps", "lowest.health > 90 " }},
+
+},
 
 {
 
