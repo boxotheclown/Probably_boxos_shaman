@@ -55,7 +55,7 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 	{ "Unleash Life", "lowest.health <= 40" },
 	{ "Ancestral Swiftness", "lowest.health <= 40" },
 	{ "Healing Surge", {
-		"lowest.health <= 40",
+		"lowest.health <= 30",
 		"lowest.range <= 40"
 	}, "lowest" },
 
@@ -66,13 +66,18 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 -- high raid damage
 
 	{{
+		{ "Riptide", { 
+			"focus.health <= 70", 
+			"!focus.buff(Riptide)", 
+			"focus.range <= 40"
+		}, "focus" },
 		{ "Healing Stream Totem" },
 		{ "Unleash Life" },
 		{ "Chain Heal", { 
 	--		"lowest.area(12).players >= 2",
 			"lowest.range <= 40" 
 		}, "lowest" },
-	}, "@coreHealing.needsHealing(3, 60)", },
+	}, "@coreHealing.needsHealing(50, 3)", },
 
 -- high single target
 	  	  
@@ -87,6 +92,12 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 		"!lowest.buff(Riptide)",
 		"focus.buff(Riptide).duration > 6",
 	}, "lowest" },
+	{ "Healing Wave", {
+		"mouseover.id(78884)",
+	}, "mouseover" },
+	{ "Healing Surge", {
+		"mouseover.id(78868)",
+	}, "mouseover" },
 	{ "Cloudburst Totem", { "talent(7, 1)", "!player.totem(Healing Stream Totem)", "!player.totem(Healing Tide Totem)" } },
 	{ "Healing Stream Totem", { "!player.totem(Healing Tide Totem)", "!player.totem(Cloudburst Totem)" } },
 	{ "Elemental Blast", { "talent(6, 3)", "player.mana < 50" } },
@@ -95,7 +106,7 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 		"lowest.range <= 40",
 	}},
 	{ "Chain Heal", {
-		"@coreHealing.needsHealing(3, 70)",
+		"@coreHealing.needsHealing(75, 3)",
 		"lowest.range <= 40",
 --		"lowest.area(10).
 	}, "lowest" },
@@ -116,11 +127,11 @@ ProbablyEngine.rotation.register_custom(264, "Boxo's Resto", {
 	{{
 		{ "Fire Elemental Totem", { "!talent(6, 2)", "modifier.cooldowns" }},
 		{ "Searing Totem", { "!player.totem(Searing Totem)", "!player.totem(Fire Elemental Totem)" }},
-		{ "Flame Shock", "!target.debuff(Flame Shock)" },
+		{ "8050", "!target.debuff(Flame Shock)" },
 		{ "Lava Burst" },
 		{ "421", { "modifier.multitarget", "target.area(10).enemies > 2" } },
 		{ "Lightning Bolt" },		
-	}, { "toggle.dps", "lowest.health > 90 " }},
+	}, "toggle.dps" },
 
 },
 

@@ -24,12 +24,12 @@ ProbablyEngine.rotation.register_custom(262, "boxo's elemental shaman", {
 
 	{ "108284", { -- totemic projection
 		"talent(3, 3)",
-		"modifier.lcontrol"
+		"modifier.lcontrol",
 	}},
 	
 	{ "108284", { -- call of the elements
 		"talent(3, 1)",
-		"modifier.lcontrol"
+		"modifier.lcontrol",
 	}},
 	
 -- banners for exp (leveling)
@@ -44,13 +44,13 @@ ProbablyEngine.rotation.register_custom(262, "boxo's elemental shaman", {
 	}},
 
 	{ "108271", { 				-- astral shift
-	  "talent(1, 3)"
+	  "talent(1, 3)",
 	  "modifier.lalt",
 	  "!player.buff(30823)"
 	}},
 
 	{ "108270", { 				-- stone bulwark totem
-	  "talent(1, 2)"
+	  "talent(1, 2)",
 	  "modifier.lalt",
 	  "!player.buff(30823)"
 	}},
@@ -143,7 +143,7 @@ ProbablyEngine.rotation.register_custom(262, "boxo's elemental shaman", {
 		
 		{ "421", {	-- chain lightning with ancestral swiftness
 			"modifier.multitarget",
-			"target.area(8).enemies > 1",
+			"target.area(8).enemies > 3",
 			"!player.buff(114050)",
 			"player.buff(Ancestral Swiftness)"
 		}},
@@ -187,7 +187,7 @@ ProbablyEngine.rotation.register_custom(262, "boxo's elemental shaman", {
 --	}, "target.ground" }, -- earthquake
 	{ "3599", { "!player.totem(2894)", "!player.totem(3599)" }}, -- searing totem
 	{ "51505" }, -- lava burst on cooldown
-	{ "421", { "modifier.multitarget", "target.area(10).enemies > 2" } },
+	{ "421", { "modifier.multitarget", "target.area(10).enemies > 3" } }, -- chain lightning cleave
 	{ "403" }, -- lightning bolt
 	
 }, {
